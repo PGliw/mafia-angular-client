@@ -44,12 +44,12 @@ export class AuthService {
 
   logOut(){
     const user = {
-      login: localStorage.getItem(this.LAST_NAME),
+      login: localStorage.getItem(this.LOGIN),
       id: localStorage.getItem(this.ID)
     }
     return this.http.put<any>(`${this.API_URL}/user/logout`, user)
     .pipe(
-      tap(() => this.removeLoginResponse),
+      tap(() => this.removeLoginResponse()),
       mapTo(true),
       catchError( error => {
         alert(error);
@@ -60,12 +60,16 @@ export class AuthService {
     )
   }
 
+  get userName() {
+    return `${localStorage.getItem(this.NAME)} ${localStorage.getItem(this.LAST_NAME)}`;
+  }
+
   get isLoggedIn() {
     // returns true if userSession is not null, else - false
     return !!this.userSession;
   }
 
-  private get userSession(){
+  get userSession(){
     return localStorage.getItem(this.USER_SESSION)
   }
 
