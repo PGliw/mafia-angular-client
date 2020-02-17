@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, mapTo, catchError } from 'rxjs/operators';
 
-export interface LoginResponse{
+export interface LoginResponse {
   id: number;
   login: string;
   name: string;
@@ -34,30 +34,28 @@ export class AuthService {
         tap(loginResponse => this.storeLoginResponse(loginResponse)),
         mapTo(true),
         catchError(error => {
-          alert(error);
-          console.log(error);
-          return of(false)
+          this.handleError(error);
+          return of(false);
         }
         )
       )
   }
 
-  logOut(){
+  logOut() {
     const user = {
       login: localStorage.getItem(this.LOGIN),
       id: localStorage.getItem(this.ID)
     }
     return this.http.put<any>(`${this.API_URL}/user/logout`, user)
-    .pipe(
-      tap(() => this.removeLoginResponse()),
-      mapTo(true),
-      catchError( error => {
-        alert(error);
-        console.log(error);
-        return of(false);
-      }
+      .pipe(
+        tap(() => this.removeLoginResponse()),
+        mapTo(true),
+        catchError(error => {
+          this.handleError(error);
+          return of(false);
+        }
+        )
       )
-    )
   }
 
   get userName() {
@@ -69,11 +67,20 @@ export class AuthService {
     return !!this.userSession;
   }
 
-  get userSession(){
+  get userSession() {
     return localStorage.getItem(this.USER_SESSION)
   }
 
-  private storeLoginResponse(loginResponse: LoginResponse){
+  private handleError(error: any) {
+    if (error instanceof HttpErrorResponse) {
+      alert(`${error.message}`)
+    }
+    else {
+      alert(error); // TODO 
+    }
+  }
+
+  private storeLoginResponse(loginResponse: LoginResponse) {
     localStorage.setItem(this.USER_SESSION, loginResponse.userSession);
     localStorage.setItem(this.LOGIN, loginResponse.login);
     localStorage.setItem(this.ID, loginResponse.id.toString());
@@ -81,7 +88,7 @@ export class AuthService {
     localStorage.setItem(this.LAST_NAME, loginResponse.lastName);
   }
 
-  private removeLoginResponse(){
+  private removeLoginResponse() {
     localStorage.removeItem(this.USER_SESSION);
     localStorage.removeItem(this.LOGIN);
     localStorage.removeItem(this.ID);
