@@ -17,13 +17,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(user: { login: string, password: string }): Observable<boolean> {
+  signIn(user: { login: string, password: string }): Observable<boolean> {
     return this.http.post<any>(`${this.API_URL}/user/login`, user)
       .pipe(
         tap(tokens => console.log(tokens)),
         mapTo(true),
         catchError(error => {
           alert(error);
+          console.log(error);
           return of(false)
         }
         )
