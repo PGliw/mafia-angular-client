@@ -3,6 +3,16 @@
 
     <!-- This fills the remaining space of the current row -->
     <span class="example-fill-remaining-space"></span>
-    <span>Name placeholder</span>
+    <span>{{userName}}</span>
     <button mat-button (click)="logOut()">Wyloguj</button>
 </mat-toolbar>
+
+<p>Dłużnicy: </p>
+<ul>
+    <li *ngFor="let debetor of debetors">{{debetor.name}} {{debetor.lastname}} - {{debetor.debt}}</li>
+</ul>
+
+<p>Zabójcy: </p>
+<ul>
+    <li *ngFor="let killer of killers">{{killer.pseudonym}} - {{killer.salary}}</li>
+</ul>

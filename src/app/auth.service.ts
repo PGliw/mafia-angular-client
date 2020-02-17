@@ -60,12 +60,16 @@ export class AuthService {
     )
   }
 
+  get userName() {
+    return `${localStorage.getItem(this.NAME)} ${localStorage.getItem(this.LAST_NAME)}`;
+  }
+
   get isLoggedIn() {
     // returns true if userSession is not null, else - false
     return !!this.userSession;
   }
 
-  private get userSession(){
+  get userSession(){
     return localStorage.getItem(this.USER_SESSION)
   }
 
