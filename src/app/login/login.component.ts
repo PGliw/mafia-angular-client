@@ -4,9 +4,9 @@ import { FormGroup, FormControl, FormGroupDirective, NgForm, FormBuilder, Valida
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 
- //ts
- export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+// ts
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, _form: FormGroupDirective | NgForm | null): boolean {
     return control.touched && control.invalid;
   }
 }
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  form: FormGroup
+  form: FormGroup;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -28,19 +28,19 @@ export class LoginComponent implements OnInit {
         login: [null, [Validators.required]],
         password: [null, [Validators.required]]
       }
-    )
+    );
   }
 
-  signIn(){
+  signIn() {
     this.form.markAllAsTouched();
-    if(this.form.valid){
+    if (this.form.valid) {
       this.authService.signIn({
         login: this.form.controls.login.value,
         password: this.form.controls.password.value
       }).subscribe(isLoggedIn => {
-        if(isLoggedIn){
+        if (isLoggedIn) {
           this.router.navigate(['dashboard']);
-        } 
+        }
       });
     }
   }

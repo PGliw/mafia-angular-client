@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { DebetorsService, Debetor} from '../debetors.service';
+import { DebetorsService, Debtor} from '../debtors.service';
 import { KillersService, Killer } from '../killers.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { KillersService, Killer } from '../killers.service';
 export class DashboardComponent implements OnInit {
 
   private userName: string;
-  private debetors: Debetor[];
+  private debetors: Debtor[];
   private killers: Killer[];
 
   constructor(

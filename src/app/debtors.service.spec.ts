@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DebetorsService } from './debetors.service';
+import { DebetorsService } from './debtors.service';
 
 describe('MafiaApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
