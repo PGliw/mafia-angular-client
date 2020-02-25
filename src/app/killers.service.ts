@@ -22,16 +22,16 @@ interface KillerRequestBody {
 })
 export class KillersService {
 
-  private readonly API_URL = 'http://localhost:8443/api';
+  private readonly KILLERS_URL = 'http://localhost:8443/api/killers';
 
   constructor(private http: HttpClient) { }
 
   public getKillers(): Observable<Killer[]> {
-    return this.http.get<Killer[]>(`${this.API_URL}/killers/list`);
+    return this.http.get<Killer[]>(`${this.KILLERS_URL}/list`);
   }
 
   public addKiller(killer: KillerRequestBody): Observable<boolean> {
-    return this.http.post<string>(`${this.API_URL}/killers/add`, killer).pipe(
+    return this.http.post<string>(`${this.KILLERS_URL}/add`, killer).pipe(
       mapTo(true),
       catchError(error => {
         this.handleError(error);
@@ -41,7 +41,7 @@ export class KillersService {
   }
 
   public updateKiller(killerId: number, killer: KillerRequestBody): Observable<boolean> {
-    return this.http.put<string>(`${this.API_URL}/killers/edit/${killerId}`, killer).pipe(
+    return this.http.put<string>(`${this.KILLERS_URL}/edit/${killerId}`, killer).pipe(
       mapTo(true),
       catchError(error => {
         this.handleError(error);
@@ -51,7 +51,7 @@ export class KillersService {
   }
 
   public deleteKiller(killerId: number): Observable<boolean> {
-    return this.http.delete<string>(`${this.API_URL}/killers/remove/${killerId}`).pipe(
+    return this.http.delete<string>(`${this.KILLERS_URL}/remove/${killerId}`).pipe(
       mapTo(true),
       catchError(error => {
         this.handleError(error);
@@ -61,7 +61,7 @@ export class KillersService {
   }
 
   public setTarget(targetRequestBody: { killerId: number; targetId: number }): Observable<boolean> {
-    return this.http.post<string>(`${this.API_URL}/killers/set-target`, targetRequestBody).pipe(
+    return this.http.post<string>(`${this.KILLERS_URL}/set-target`, targetRequestBody).pipe(
       mapTo(true),
       catchError(error => {
         this.handleError(error);
@@ -72,7 +72,7 @@ export class KillersService {
   }
 
   public cancelTarget(targetId: number): Observable<boolean> {
-    return this.http.delete<string>(`${this.API_URL}/killers/cancel-target/${targetId} `).pipe(
+    return this.http.delete<string>(`${this.KILLERS_URL}/cancel-target/${targetId} `).pipe(
       mapTo(true),
       catchError(error => {
         this.handleError(error);

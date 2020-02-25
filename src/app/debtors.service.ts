@@ -24,18 +24,18 @@ interface DebtorRequestBody {
 @Injectable({
   providedIn: 'root'
 })
-export class DebetorsService {
+export class DebtorsService {
 
-  private readonly API_URL = 'http://localhost:8443/api';
+  private readonly DEBTORS_URL = 'http://localhost:8443/api/debtors';
 
   constructor(private http: HttpClient) { }
 
   public getDebetors(): Observable<Debtor[]> {
-    return this.http.get<Debtor[]>(`${this.API_URL}/debtors/list`);
+    return this.http.get<Debtor[]>(`${this.DEBTORS_URL}/list`);
   }
 
   public addDebetor(debtor: DebtorRequestBody): Observable<boolean> {
-    return this.http.post<string>(`${this.API_URL}/debtors/add`, debtor).pipe(
+    return this.http.post<string>(`${this.DEBTORS_URL}/add`, debtor).pipe(
       mapTo(true),
       catchError(error => {
         this.handleError(error);
@@ -45,7 +45,7 @@ export class DebetorsService {
   }
 
   public updateDebetor(debtorId: number, debtor: DebtorRequestBody): Observable<boolean> {
-    return this.http.put<string>(`${this.API_URL}/debtors/edit/${debtorId}`, debtor).pipe(
+    return this.http.put<string>(`${this.DEBTORS_URL}/edit/${debtorId}`, debtor).pipe(
       mapTo(true),
       catchError(error => {
         this.handleError(error);
@@ -55,7 +55,7 @@ export class DebetorsService {
   }
 
   public deleteDebtor(debtorId: number): Observable<boolean> {
-    return this.http.delete<string>(`${this.API_URL}/debtors/remove/${debtorId}`).pipe(
+    return this.http.delete<string>(`${this.DEBTORS_URL}/remove/${debtorId}`).pipe(
       mapTo(true),
       catchError(error => {
         this.handleError(error);
@@ -65,7 +65,7 @@ export class DebetorsService {
   }
 
   public cancelTask(taskId: number): Observable<boolean> {
-    return this.http.delete<string>(`${this.API_URL}/debtors/cancel-task/${taskId} `).pipe(
+    return this.http.delete<string>(`${this.DEBTORS_URL}/cancel-task/${taskId} `).pipe(
       mapTo(true),
       catchError(error => {
         this.handleError(error);
