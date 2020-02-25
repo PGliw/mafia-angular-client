@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { MafiaApiService, Debetor, Killer } from '../mafia-api.service';
+import { DebtorsService, Debtor} from '../debtors.service';
+import { KillersService, Killer } from '../killers.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,29 +12,34 @@ import { MafiaApiService, Debetor, Killer } from '../mafia-api.service';
 export class DashboardComponent implements OnInit {
 
   private userName: string;
-  private debetors: Debetor[];
+  private debetors: Debtor[];
   private killers: Killer[];
 
-  constructor(private authService: AuthService, private router: Router, private mafiaApiService: MafiaApiService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private debetorsService: DebtorsService,
+    private killerService: KillersService
+    ) { }
 
   ngOnInit() {
     this.userName = this.authService.userName;
-    this.mafiaApiService.getDebetors().subscribe(
+    this.debetorsService.getDebetors().subscribe(
       debetors => {
         this.debetors = debetors;
       }
-    )
-    this.mafiaApiService.getKillers().subscribe(
+    );
+    this.killerService.getKillers().subscribe(
       killers => {
         this.killers = killers;
       }
-    )
+    );
   }
 
-  logOut(){
+  logOut() {
     this.authService.logOut().subscribe(
       isLogoutSuccessfull => {
-        if(isLogoutSuccessfull){
+        if (isLogoutSuccessfull) {
           this.router.navigate(['login']);
         }
       }

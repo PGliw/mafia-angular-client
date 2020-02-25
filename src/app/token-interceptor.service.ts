@@ -14,18 +14,18 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.authService.userSession) {
-      request = this.addToken(request, this.authService.userSession)
+      request = this.addToken(request, this.authService.userSession);
     }
 
     return next.handle(request).pipe(
       catchError(error => {
-        if(error.status in [401, 403]){
+        if (error.status in [401, 403]) {
           this.router.navigate(['login']);
         }
-        return throwError(error)
+        return throwError(error);
       }
       )
-    )
+    );
   }
 
   private addToken(request: HttpRequest<any>, token: string) {
@@ -35,7 +35,6 @@ export class TokenInterceptorService implements HttpInterceptor {
           'user-session': token
         }
       }
-    )
+    );
   }
-  
 }

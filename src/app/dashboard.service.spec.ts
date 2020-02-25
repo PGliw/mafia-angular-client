@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MafiaApiService } from './mafia-api.service';
+import { DashboardService } from './dashboard.service';
 
-describe('MafiaApiService', () => {
+describe('DashboardService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MafiaApiService = TestBed.get(MafiaApiService);
+    const service: DashboardService = TestBed.get(DashboardService);
     expect(service).toBeTruthy();
   });
 });
