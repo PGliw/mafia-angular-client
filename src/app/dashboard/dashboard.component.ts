@@ -16,13 +16,7 @@ export class DashboardComponent implements OnInit {
   private debetors: Debtor[];
   private killers: Killer[];
   private widgets: Widget[];
-
-  private myPos = {
-    top: 5,
-    left: 5,
-    height: 1,
-    width: 1
-  };
+  private isEditing = false;
 
   constructor(
     private authService: AuthService,
@@ -56,6 +50,31 @@ export class DashboardComponent implements OnInit {
         }
       }
     );
+  }
+
+  startEditing() {
+    this.isEditing = true;
+  }
+  cancelEditing() {
+    this.isEditing = false;
+  }
+  saveEditing() {
+    this.isEditing = false;
+  }
+
+  // TODO move it to separate compomnent and initially ???
+  onVisibilityChange(value: string) {
+    switch (value) {
+      case 'debtors':
+        console.log(0);
+        break;
+      case 'killers':
+        console.log(1);
+        break;
+      case 'map':
+        console.log(2);
+        break;
+    }
   }
 
 }

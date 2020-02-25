@@ -6,22 +6,24 @@
   <span>{{userName}}</span>
   <button mat-button (click)="logOut()">Wyloguj</button>
 </mat-toolbar>
-
+<div>
+  <button *ngIf="!isEditing; else editing" mat-stroked-button color="primary" (click)="startEditing()">Edytuj</button>
+  <ng-template #editing>
+    <button mat-stroked-button color="primary" (click)="saveEditing()">Zatwierdź</button>
+    <button mat-stroked-button color="primary" (click)="cancelEditing()">Anuluj</button>
+    <mat-button-toggle-group multiple>
+      <mat-button-toggle value="debtors" (change)="onVisibilityChange($event.value)">Dłuznicy</mat-button-toggle>
+      <mat-button-toggle value="killers" (change)="onVisibilityChange($event.value)">Zabójcy</mat-button-toggle>
+      <mat-button-toggle value="map" (change)="onVisibilityChange($event.value)">Mapa</mat-button-toggle>
+    </mat-button-toggle-group>
+  </ng-template>
+</div>
 <ngx-widget-grid [rows]="100" [columns]="100" [showGrid]="true">
   <ngx-widget *ngFor="let widget of widgets" [(position)]="widget.position" [movable]="true" [resizable]="true">
+    <!-- TODO: make components for each widget (maybe one component for ) -->
     <div style="height:100%;width:100%; display:flex;">
       <div style="height:100%;width:100%; padding:10px; background-color: rgb(140, 198, 0);">
       </div>
     </div>
   </ngx-widget>
 </ngx-widget-grid>
-
-<!-- <p>Dłużnicy: </p>
-<ul>
-    <li *ngFor="let debetor of debetors">{{debetor.name}} {{debetor.lastname}} - {{debetor.debt}}</li>
-</ul>
-
-<p>Zabójcy: </p>
-<ul>
-    <li *ngFor="let killer of killers">{{killer.pseudonym}} - {{killer.salary}}</li>
-</ul> -->

@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { NgxWidgetGridModule } from 'ngx-widget-grid';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { NgxWidgetGridModule } from 'ngx-widget-grid';
     ReactiveFormsModule,
     MatButtonModule,
     MatToolbarModule,
-    NgxWidgetGridModule
+    NgxWidgetGridModule,
+    MatButtonToggleModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
