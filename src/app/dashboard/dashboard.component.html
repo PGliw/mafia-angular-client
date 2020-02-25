@@ -1,13 +1,22 @@
 <mat-toolbar color="primary">
-    <span>Dashboard</span>
+  <span>Dashboard</span>
 
-    <!-- This fills the remaining space of the current row -->
-    <span class="example-fill-remaining-space"></span>
-    <span>{{userName}}</span>
-    <button mat-button (click)="logOut()">Wyloguj</button>
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+  <span>{{userName}}</span>
+  <button mat-button (click)="logOut()">Wyloguj</button>
 </mat-toolbar>
 
-<p>Dłużnicy: </p>
+<ngx-widget-grid [rows]="100" [columns]="100" [showGrid]="true">
+  <ngx-widget *ngFor="let widget of widgets" [(position)]="widget.position" [movable]="true" [resizable]="true">
+    <div style="height:100%;width:100%; display:flex;">
+      <div style="height:100%;width:100%; padding:10px; background-color: rgb(140, 198, 0);">
+      </div>
+    </div>
+  </ngx-widget>
+</ngx-widget-grid>
+
+<!-- <p>Dłużnicy: </p>
 <ul>
     <li *ngFor="let debetor of debetors">{{debetor.name}} {{debetor.lastname}} - {{debetor.debt}}</li>
 </ul>
@@ -15,4 +24,4 @@
 <p>Zabójcy: </p>
 <ul>
     <li *ngFor="let killer of killers">{{killer.pseudonym}} - {{killer.salary}}</li>
-</ul>
+</ul> -->

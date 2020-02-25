@@ -27,8 +27,8 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  public getWidgets(): Observable<Widget[]> {
-    return this.http.get<DashboardResponse>(this.DASHBOARD_URL).pipe(
+  public getWidgets(userId: number): Observable<Widget[]> {
+    return this.http.get<DashboardResponse>(`${this.DASHBOARD_URL}/get/${userId}`).pipe(
       map(value => JSON.parse(value.widgets)),
       catchError(error => {
         this.handleError(error);
@@ -38,7 +38,7 @@ export class DashboardService {
   }
 
   public saveWidgets(userId: number, widgets: Widget[]): Observable<boolean> {
-    return this.http.post<string>(this.DASHBOARD_URL, { userId, widgets: JSON.stringify(widgets) }).pipe(
+    return this.http.post<string>(`${this.DASHBOARD_URL}/add`, { userId, widgets: JSON.stringify(widgets) }).pipe(
       mapTo(true),
       catchError(error => {
         this.handleError(error);
