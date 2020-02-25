@@ -6,11 +6,11 @@ import { AuthGuardService } from './auth-guard.service';
 import { DashboardGuardService } from './dashboard-guard.service';
 
 
-const routes : Routes = [
+const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardService]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [DashboardGuardService]}
-]
+];
 
 @NgModule({
   imports: [

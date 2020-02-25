@@ -38,14 +38,14 @@ export class AuthService {
           return of(false);
         }
         )
-      )
+      );
   }
 
   logOut() {
     const user = {
       login: localStorage.getItem(this.LOGIN),
       id: localStorage.getItem(this.ID)
-    }
+    };
     return this.http.put<any>(`${this.API_URL}/user/logout`, user)
       .pipe(
         tap(() => this.removeLoginResponse()),
@@ -55,7 +55,7 @@ export class AuthService {
           return of(false);
         }
         )
-      )
+      );
   }
 
   get userName() {
@@ -68,15 +68,14 @@ export class AuthService {
   }
 
   get userSession() {
-    return localStorage.getItem(this.USER_SESSION)
+    return localStorage.getItem(this.USER_SESSION);
   }
 
   private handleError(error: any) {
     if (error instanceof HttpErrorResponse) {
-      alert(`${error.message}`)
-    }
-    else {
-      alert(error); // TODO 
+      alert(`${error.message}`);
+    } else {
+      alert(error); // TODO
     }
   }
 

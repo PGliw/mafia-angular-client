@@ -17,7 +17,7 @@ export interface Killer {
   pseudonym: string;
   location: string;
   salary: number;
-  targetId: number
+  targetId: number;
 }
 
 @Injectable({
@@ -29,12 +29,12 @@ export class MafiaApiService {
 
   constructor(private http: HttpClient) { }
 
-  public getDebetors() : Observable<Debetor[]>{
-    return this.http.get<Debetor[]>(`${this.API_URL}/debtors/list`)
+  public getDebetors(): Observable<Debetor[]> {
+    return this.http.get<Debetor[]>(`${this.API_URL}/debtors/list`);
   }
 
-  public getKillers(): Observable<Killer[]>{
-    return this.http.get<Killer[]>(`${this.API_URL}/killers/list`)
+  public getKillers(): Observable<Killer[]> {
+    return this.http.get<Killer[]>(`${this.API_URL}/killers/list`);
   }
 
 }

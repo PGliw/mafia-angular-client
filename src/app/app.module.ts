@@ -25,7 +25,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AppRoutingModule, 
+    AppRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
