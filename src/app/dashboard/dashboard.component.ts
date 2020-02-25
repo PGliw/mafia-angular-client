@@ -13,7 +13,7 @@ import { Widget, DashboardService } from '../dashboard.service';
 export class DashboardComponent implements OnInit {
 
   private userName: string;
-  private debetors: Debtor[];
+  private debtors: Debtor[];
   private killers: Killer[];
   private widgets: Widget[];
   private isEditing = false;
@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private debetorsService: DebtorsService,
+    private debtorService: DebtorsService,
     private killerService: KillersService,
     private dashboardService: DashboardService
   ) { }
@@ -34,8 +34,8 @@ export class DashboardComponent implements OnInit {
         console.log(widgets);
       }
     );
-    this.debetorsService.getDebetors().subscribe(
-      debetors => this.debetors = debetors
+    this.debtorService.getDebtors().subscribe(
+      debetors => this.debtors = debetors
     );
     this.killerService.getKillers().subscribe(
       killers => this.killers = killers
@@ -44,8 +44,8 @@ export class DashboardComponent implements OnInit {
 
   logOut() {
     this.authService.logOut().subscribe(
-      isLogoutSuccessfull => {
-        if (isLogoutSuccessfull) {
+      isLogoutSuccessful => {
+        if (isLogoutSuccessful) {
           this.router.navigate(['login']);
         }
       }
@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
     this.isEditing = false;
   }
 
-  // TODO move it to separate compomnent and initially ???
+  // TODO move it to separate component and initially ???
   onVisibilityChange(value: string) {
     switch (value) {
       case 'debtors':
