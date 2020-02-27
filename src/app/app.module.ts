@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { NgxWidgetGridModule } from 'ngx-widget-grid';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatCheckboxModule} from '@angular/material';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatButtonModule,
     MatToolbarModule,
     NgxWidgetGridModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatCheckboxModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

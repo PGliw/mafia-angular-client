@@ -9,13 +9,15 @@
 <div>
   <button *ngIf="!isEditing; else editing" mat-stroked-button color="primary" (click)="startEditing()">Edytuj</button>
   <ng-template #editing>
-    <button mat-stroked-button color="primary" (click)="saveEditing()">Zatwierdź</button>
-    <button mat-stroked-button color="primary" (click)="cancelEditing()">Anuluj</button>
-    <mat-button-toggle-group multiple>
-      <mat-button-toggle value="debtors" (change)="onVisibilityChange($event.value)">Dłuznicy</mat-button-toggle>
-      <mat-button-toggle value="killers" (change)="onVisibilityChange($event.value)">Zabójcy</mat-button-toggle>
-      <mat-button-toggle value="map" (change)="onVisibilityChange($event.value)">Mapa</mat-button-toggle>
-    </mat-button-toggle-group>
+<!--    <form>-->
+      <span>
+        <button mat-stroked-button color="primary" (click)="saveEditing()">Zatwierdź</button>
+        <button mat-stroked-button color="primary" (click)="cancelEditing()">Anuluj</button>
+      </span>
+      <section class="checkbox-container">
+        <mat-checkbox *ngFor="let widgetOption of widgetOptions" [checked]="widgetOption.checked" (change)="changeChecked(widgetOption, $event)">{{widgetOption.title}}</mat-checkbox>
+      </section>
+<!--    </form>-->
   </ng-template>
 </div>
 <ngx-widget-grid [rows]="100" [columns]="100" [showGrid]="true">
