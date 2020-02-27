@@ -9,23 +9,26 @@
 <div>
   <button *ngIf="!isEditing; else editing" mat-stroked-button color="primary" (click)="startEditing()">Edytuj</button>
   <ng-template #editing>
-<!--    <form>-->
-      <span>
+    <!--    <form>-->
+    <span>
         <button mat-stroked-button color="primary" (click)="saveEditing()">Zatwierdź</button>
         <button mat-stroked-button color="primary" (click)="cancelEditing()">Anuluj</button>
       </span>
-      <section class="checkbox-container">
-        <mat-checkbox *ngFor="let widgetOption of widgetOptions" [checked]="widgetOption.checked" (change)="changeChecked(widgetOption, $event)">{{widgetOption.title}}</mat-checkbox>
-      </section>
-<!--    </form>-->
+    <section class="checkbox-container">
+      <mat-checkbox *ngFor="let widgetOption of widgetOptions" [checked]="widgetOption.checked"
+                    (change)="changeChecked(widgetOption, $event)">{{widgetOption.title}}</mat-checkbox>
+    </section>
+    <!--    </form>-->
   </ng-template>
 </div>
 <ngx-widget-grid [rows]="100" [columns]="100" [showGrid]="true">
-  <ngx-widget *ngFor="let widget of widgets" [(position)]="widget.position" [movable]="true" [resizable]="true">
+  <span *ngFor="let widget of widgets">
+  <ngx-widget *ngIf="isWidgetVisible(widget)" [(position)]="widget.position" [movable]="true" [resizable]="true">
     <!-- TODO: make components for each widget (maybe one component for ) -->
     <div style="height:100%;width:100%; display:flex;">
       <div style="height:100%;width:100%; padding:10px; background-color: rgb(140, 198, 0);">
       </div>
     </div>
   </ngx-widget>
+    </span>
 </ngx-widget-grid>

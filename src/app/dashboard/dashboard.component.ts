@@ -42,13 +42,8 @@ export class DashboardComponent implements OnInit {
   ];
   private oldWidgetOptions: WidgetOption[];
 
-  static  clone(array: any[]) {
+  static clone(array: any[]) {
     return array.map(obj => Object.assign({}, obj));
-  }
-
-  changeChecked(widgetOption: WidgetOption, $event) {
-    const option = this.widgetOptions.find(wo => wo.type === widgetOption.type);
-    option.checked = $event.checked;
   }
 
   constructor(
@@ -88,6 +83,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  changeChecked(widgetOption: WidgetOption, $event) {
+    const option = this.widgetOptions.find(wo => wo.type === widgetOption.type);
+    option.checked = $event.checked;
+  }
+
   startEditing() {
     this.isEditing = true;
     this.oldWidgetOptions = DashboardComponent.clone(this.widgetOptions);
@@ -100,5 +100,9 @@ export class DashboardComponent implements OnInit {
 
   saveEditing() {
     this.isEditing = false;
+  }
+
+  isWidgetVisible(widget: Widget) {
+    return this.widgetOptions.find(wo => wo.type === widget.type).checked;
   }
 }
