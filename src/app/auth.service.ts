@@ -71,6 +71,10 @@ export class AuthService {
     return localStorage.getItem(this.USER_SESSION);
   }
 
+  get userId() {
+    return localStorage.getItem(this.ID);
+  }
+
   private handleError(error: any) {
     if (error instanceof HttpErrorResponse) {
       alert(`${error.message}`);

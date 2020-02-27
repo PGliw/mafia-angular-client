@@ -30,11 +30,11 @@ export class DebtorsService {
 
   constructor(private http: HttpClient) { }
 
-  public getDebetors(): Observable<Debtor[]> {
+  public getDebtors(): Observable<Debtor[]> {
     return this.http.get<Debtor[]>(`${this.DEBTORS_URL}/list`);
   }
 
-  public addDebetor(debtor: DebtorRequestBody): Observable<boolean> {
+  public addDebtor(debtor: DebtorRequestBody): Observable<boolean> {
     return this.http.post<string>(`${this.DEBTORS_URL}/add`, debtor).pipe(
       mapTo(true),
       catchError(error => {
@@ -44,7 +44,7 @@ export class DebtorsService {
     );
   }
 
-  public updateDebetor(debtorId: number, debtor: DebtorRequestBody): Observable<boolean> {
+  public updateDebtor(debtorId: number, debtor: DebtorRequestBody): Observable<boolean> {
     return this.http.put<string>(`${this.DEBTORS_URL}/edit/${debtorId}`, debtor).pipe(
       mapTo(true),
       catchError(error => {
