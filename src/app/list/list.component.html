@@ -1,28 +1,30 @@
-<mat-card class="mat-elevation-z8">
+<mat-card class="mat-elevation-z8" class="main-card" cdkScrollable>
   <mat-card-header>
     <mat-card-title>{{title}}</mat-card-title>
   </mat-card-header>
-  <mat-list>
-    <mat-list-item *ngFor="let item of items">
-      <mat-card mat-elevation-z12 class="mat-elevation-z4">
-        <span class="item-title">
-          {{item}}
-        </span>
-        <span class="row-buttons">
-          <button mat-storked-button title="actionTitle">
-            <mat-icon>{{actionIcon}}</mat-icon>
-          </button>
-          <button mat-storked-button>
-            <mat-icon>place</mat-icon>
-          </button>
-          <button mat-storked-button>
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-storked-button>
-            <mat-icon>delete</mat-icon>
-          </button>
-        </span>
-      </mat-card>
-    </mat-list-item>
-  </mat-list>
+  <ng-scrollbar track="all" pointerEventsMethod="scrollbar">
+    <mat-list>
+      <mat-list-item *ngFor="let item of items">
+        <mat-card mat-elevation-z12 class="mat-elevation-z4">
+          <span class="item-title">
+            {{item}}
+          </span>
+          <span class="row-buttons">
+            <button mat-storked-button [title]="actionTile">
+              <mat-icon>{{actionIcon}}</mat-icon>
+            </button>
+            <button mat-storked-button title="Pokaż na mapie">
+              <mat-icon>place</mat-icon>
+            </button>
+            <button mat-storked-button title="Edytuj">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-storked-button title="Usuń">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </span>
+        </mat-card>
+      </mat-list-item>
+    </mat-list>
+  </ng-scrollbar>
 </mat-card>
