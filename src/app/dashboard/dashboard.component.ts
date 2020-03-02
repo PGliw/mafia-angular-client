@@ -18,12 +18,12 @@ interface WidgetOption {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  private userName: string;
-  private debtors: Debtor[];
-  private killers: Killer[];
-  private widgets: Widget[];
-  private isEditing = false;
-  private widgetOptions: WidgetOption[] = [
+  userName: string;
+  debtors: Debtor[];
+  killers: Killer[];
+  widgets: Widget[];
+  isEditing = false;
+  widgetOptions: WidgetOption[] = [
     {
       type: 0,
       title: 'Dłużnicy',
@@ -104,5 +104,13 @@ export class DashboardComponent implements OnInit {
 
   isWidgetVisible(widget: Widget) {
     return this.widgetOptions.find(wo => wo.type === widget.type).checked;
+  }
+
+  get debtorsItems() {
+    return this.debtors.map(debtor => `${debtor.name} ${debtor.lastname} - ${debtor.debt}`);
+  }
+
+  get killersItems() {
+    return this.killers.map(killer => `${killer.pseudonym} - ${killer.salary}`);
   }
 }

@@ -16,13 +16,19 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { NgxWidgetGridModule } from 'ngx-widget-grid';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {MatCheckboxModule} from '@angular/material';
+import { ListComponent } from './list/list.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +43,10 @@ import {MatCheckboxModule} from '@angular/material';
     MatToolbarModule,
     NgxWidgetGridModule,
     MatButtonToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule,
+    MatListModule,
+    MatIconModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

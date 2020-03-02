@@ -23,12 +23,17 @@
 </div>
 <ngx-widget-grid [rows]="100" [columns]="100" [showGrid]="true">
   <span *ngFor="let widget of widgets">
-  <ngx-widget *ngIf="isWidgetVisible(widget)" [(position)]="widget.position" [movable]="true" [resizable]="true">
+  <ngx-widget *ngIf="isWidgetVisible(widget)" [(position)]="widget.position" [movable]="isEditing" [resizable]="isEditing">
     <!-- TODO: make components for each widget (maybe one component for ) -->
-    <div style="height:100%;width:100%; display:flex;">
+    <app-list *ngIf="widget.type == 0" [title]="widget.options.title" [items]="debtorsItems" [actionTile]="'Wybacz'" [actionIcon] = "'favorite'">
+    </app-list>
+    <app-list *ngIf="widget.type == 1" [title]="widget.options.title" [items]="killersItems" [actionTile]="'Zleć'" [actionIcon]="'gps_fixed'">
+    </app-list>
+    <app-list *ngIf="widget.type == 2" [title]="widget.options.title"></app-list>
+    <!-- <div style="height:100%;width:100%; display:flex;">
       <div style="height:100%;width:100%; padding:10px; background-color: rgb(140, 198, 0);">
       </div>
-    </div>
+    </div> -->
   </ngx-widget>
     </span>
 </ngx-widget-grid>

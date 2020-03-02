@@ -1,0 +1,28 @@
+<mat-card >
+  <mat-card-header>
+    <mat-card-title>{{title}}</mat-card-title>
+  </mat-card-header>
+  <mat-list>
+    <mat-list-item *ngFor="let item of items">
+      <mat-card mat-elevation-z12>
+        <span class="item-title">
+          {{item}}
+        </span>
+        <span class="row-buttons">
+          <button mat-storked-button title="actionTitle">
+            <mat-icon>{{actionIcon}}</mat-icon>
+          </button>
+          <button mat-storked-button>
+            <mat-icon>place</mat-icon>
+          </button>
+          <button mat-storked-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-storked-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
+      </mat-card>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
