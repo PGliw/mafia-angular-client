@@ -23,7 +23,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MapComponent } from './map/map.component';
-import {AngularOpenlayersModule} from 'ngx-openlayers';
+// import {AngularOpenlayersModule} from 'ngx-openlayers';
 
 
 @NgModule({
@@ -52,8 +52,7 @@ import {AngularOpenlayersModule} from 'ngx-openlayers';
     MatListModule,
     MatIconModule,
     ScrollingModule,
-    NgScrollbarModule,
-    AngularOpenlayersModule
+    NgScrollbarModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

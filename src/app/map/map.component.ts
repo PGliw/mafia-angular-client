@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Debtor } from '../debtors.service';
 import { Killer } from '../killers.service';
 import Map from 'ol/map';
@@ -12,7 +12,7 @@ import View from 'ol/View';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, AfterViewInit {
 
   map: Map;
 
@@ -26,9 +26,13 @@ export class MapComponent implements OnInit {
     this.initializeMap();
   }
 
+  ngAfterViewInit() {
+    this.map.updateSize();
+  }
+
   private initializeMap() {
     this.map = new Map({
-      target: 'map',
+      target: 'map-container',
       layers: [
         new Tile({
           source: new OSM()
