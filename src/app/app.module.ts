@@ -22,6 +22,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { MapComponent } from './map/map.component';
+// import {AngularOpenlayersModule} from 'ngx-openlayers';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    ListComponent
+    ListComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
