@@ -12,7 +12,7 @@ import View from 'ol/View';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit, AfterViewInit {
+export class MapComponent implements OnInit, DoCheck {
 
   map: Map;
 
@@ -26,7 +26,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.initializeMap();
   }
 
-  ngAfterViewInit() {
+  ngDoCheck() {
     this.map.updateSize();
   }
 
