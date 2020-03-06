@@ -20,10 +20,7 @@ import { ListComponent } from './list/list.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
-import {ScrollingModule} from '@angular/cdk/scrolling';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MapComponent } from './map/map.component';
-// import {AngularOpenlayersModule} from 'ngx-openlayers';
 
 
 @NgModule({
@@ -50,9 +47,7 @@ import { MapComponent } from './map/map.component';
     MatCheckboxModule,
     MatCardModule,
     MatListModule,
-    MatIconModule,
-    ScrollingModule,
-    NgScrollbarModule
+    MatIconModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

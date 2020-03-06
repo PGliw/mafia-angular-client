@@ -2,7 +2,6 @@
   <mat-card-header>
     <mat-card-title>{{title}}</mat-card-title>
   </mat-card-header>
-  <ng-scrollbar track="all" pointerEventsMethod="scrollbar">
     <mat-list>
       <mat-list-item *ngFor="let item of items">
         <mat-card mat-elevation-z12 class="mat-elevation-z4">
@@ -26,5 +25,4 @@
         </mat-card>
       </mat-list-item>
     </mat-list>
-  </ng-scrollbar>
 </mat-card>
