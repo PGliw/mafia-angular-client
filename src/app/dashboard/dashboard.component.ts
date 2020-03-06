@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../auth.service';
-import {Router} from '@angular/router';
-import {DebtorsService, Debtor} from '../debtors.service';
-import {KillersService, Killer} from '../killers.service';
-import {Widget, DashboardService} from '../dashboard.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { DebtorsService, Debtor } from '../debtors.service';
+import { KillersService, Killer } from '../killers.service';
+import { Widget, DashboardService } from '../dashboard.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 interface WidgetOption {
   type: number;
@@ -107,10 +107,10 @@ export class DashboardComponent implements OnInit {
   }
 
   get debtorsItems() {
-    return this.debtors.map(debtor => `${debtor.name} ${debtor.lastname} - ${debtor.debt}`);
+    if (this.debtors) { return this.debtors.map(debtor => `${debtor.name} ${debtor.lastname} - ${debtor.debt}`); }
   }
 
   get killersItems() {
-    return this.killers.map(killer => `${killer.pseudonym} - ${killer.salary}`);
+    if (this.killers) { return this.killers.map(killer => `${killer.pseudonym} - ${killer.salary}`); }
   }
 }

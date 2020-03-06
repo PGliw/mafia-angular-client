@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, DoCheck, OnChanges } from '@angular/core';
 import { Debtor } from '../debtors.service';
 import { Killer } from '../killers.service';
 import Map from 'ol/map';
@@ -10,15 +10,14 @@ import sourceVector from 'ol/source/Vector';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import { fromLonLat } from 'ol/proj';
-import { Markers } from 'ol/layer';
-import { Style, Icon, Fill, Stroke } from 'ol/style';
+import { Style, Icon } from 'ol/style';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit, DoCheck {
+export class MapComponent implements OnInit, OnChanges {
 
   map: Map;
 
@@ -30,12 +29,14 @@ export class MapComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.initializeMap();
-    this.addPoints();
   }
 
   // otherwise map is blank until resizing broswer window
-  ngDoCheck() {
-    this.map.updateSize();
+  ngOnChanges() {
+    if (this.map && this.debtors && this.killers) {
+      this.addPoints();
+      this.map.updateSize();
+    }
   }
 
   private initializeMap() {
@@ -47,8 +48,8 @@ export class MapComponent implements OnInit, DoCheck {
         })
       ],
       view: new View({
-        center: [37.4, 8.82],
-        zoom: 4
+        center: fromLonLat([17.038538, 51.107883]),
+        zoom: 5
       })
     });
   }
@@ -56,13 +57,19 @@ export class MapComponent implements OnInit, DoCheck {
   private addPoints() {
     const debotorsLocations = this.debtors.map(debtor => this.getCoordinates(debtor));
     const killerLocations = this.killers.map(killer => this.getCoordinates(killer));
-    const debtorsLayer = this.locationsToPointsLayer(debotorsLocations, 'assets/images/red_star_transparent_small.png');
-    const killersLayer = this.locationsToPointsLayer(killerLocations, 'assets/images/gun_small.png');
+    const debtorsSourceVector = this.locationsToPointsSourceVector(debotorsLocations, 'assets/images/red_star_transparent_small.png');
+    const killersSourceVector = this.locationsToPointsSourceVector(killerLocations, 'assets/images/gun_small.png');
+    const debtorsLayer = new layerVector({
+      source: debtorsSourceVector
+    });
+    const killersLayer = new layerVector({
+      source: killersSourceVector
+    });
     this.map.addLayer(debtorsLayer);
     this.map.addLayer(killersLayer);
   }
 
-  private locationsToPointsLayer(locations: number[][], iconPath: string) {
+  private locationsToPointsSourceVector(locations: number[][], iconPath: string) {
     const markers: Feature[] = locations.map(location => new Feature({
       geometry: new Point(fromLonLat(location))
     }));
@@ -74,13 +81,11 @@ export class MapComponent implements OnInit, DoCheck {
         }
       )
     })));
-    return new layerVector({
-      source: new sourceVector(
-        {
-          features: markers
-        }
-      )
-    });
+    return new sourceVector(
+      {
+        features: markers
+      }
+    );
   }
 
   private getCoordinates(person: Debtor | Killer): number[] {
