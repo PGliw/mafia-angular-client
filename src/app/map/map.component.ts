@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, DoCheck, OnChanges } from '@angular/core';
 import { Debtor } from '../debtors.service';
 import { Killer } from '../killers.service';
 import Map from 'ol/map';
@@ -18,7 +18,7 @@ import { Style, Icon, Fill, Stroke } from 'ol/style';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit, DoCheck {
+export class MapComponent implements OnInit, OnChanges {
 
   map: Map;
 
@@ -30,12 +30,14 @@ export class MapComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.initializeMap();
-    this.addPoints();
-  }
+    }
 
   // otherwise map is blank until resizing broswer window
-  ngDoCheck() {
-    this.map.updateSize();
+  ngOnChanges() {
+    if (this.map && this.debtors && this.killers) {
+      this.addPoints();
+      this.map.updateSize();
+    }
   }
 
   private initializeMap() {
