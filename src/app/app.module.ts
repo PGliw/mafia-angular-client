@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -52,7 +52,7 @@ import { MapComponent } from './map/map.component';
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
-    multi: true
+    multi: true,
   }],
   bootstrap: [AppComponent]
 })

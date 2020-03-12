@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { mapTo, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 // TODO move interfaces to another file
 export interface Debtor {
@@ -26,7 +27,7 @@ interface DebtorRequestBody {
 })
 export class DebtorsService {
 
-  private readonly DEBTORS_URL = 'http://localhost:8443/api/debtors';
+  private readonly DEBTORS_URL = `${environment.baseUrl}/debtors`;
 
   constructor(private http: HttpClient) { }
 
@@ -36,50 +37,26 @@ export class DebtorsService {
 
   public addDebtor(debtor: DebtorRequestBody): Observable<boolean> {
     return this.http.post<string>(`${this.DEBTORS_URL}/add`, debtor).pipe(
-      mapTo(true),
-      catchError(error => {
-        this.handleError(error);
-        return of(false);
-      })
+      mapTo(true)
     );
   }
 
   public updateDebtor(debtorId: number, debtor: DebtorRequestBody): Observable<boolean> {
     return this.http.put<string>(`${this.DEBTORS_URL}/edit/${debtorId}`, debtor).pipe(
-      mapTo(true),
-      catchError(error => {
-        this.handleError(error);
-        return of(false);
-      })
+      mapTo(true)
     );
   }
 
   public deleteDebtor(debtorId: number): Observable<boolean> {
     return this.http.delete<string>(`${this.DEBTORS_URL}/remove/${debtorId}`).pipe(
-      mapTo(true),
-      catchError(error => {
-        this.handleError(error);
-        return of(false);
-      })
+      mapTo(true)
     );
   }
 
   public cancelTask(taskId: number): Observable<boolean> {
     return this.http.delete<string>(`${this.DEBTORS_URL}/cancel-task/${taskId} `).pipe(
-      mapTo(true),
-      catchError(error => {
-        this.handleError(error);
-        return of(false);
-      })
+      mapTo(true)
     );
-  }
-
-  private handleError(error: any) {
-    if (error instanceof HttpErrorResponse) {
-      alert(`${error.message}`);
-    } else {
-      alert(error); // TODO
-    }
   }
 
 }

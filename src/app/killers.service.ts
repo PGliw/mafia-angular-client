@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { mapTo, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 export interface Killer {
   id: number;
@@ -22,7 +23,7 @@ interface KillerRequestBody {
 })
 export class KillersService {
 
-  private readonly KILLERS_URL = 'http://localhost:8443/api/killers';
+  private readonly KILLERS_URL = `${environment.baseUrl}/killers`;
 
   constructor(private http: HttpClient) { }
 
@@ -33,60 +34,30 @@ export class KillersService {
   public addKiller(killer: KillerRequestBody): Observable<boolean> {
     return this.http.post<string>(`${this.KILLERS_URL}/add`, killer).pipe(
       mapTo(true),
-      catchError(error => {
-        this.handleError(error);
-        return of(false);
-      })
     );
   }
 
   public updateKiller(killerId: number, killer: KillerRequestBody): Observable<boolean> {
     return this.http.put<string>(`${this.KILLERS_URL}/edit/${killerId}`, killer).pipe(
-      mapTo(true),
-      catchError(error => {
-        this.handleError(error);
-        return of(false);
-      })
+      mapTo(true)
     );
   }
 
   public deleteKiller(killerId: number): Observable<boolean> {
     return this.http.delete<string>(`${this.KILLERS_URL}/remove/${killerId}`).pipe(
-      mapTo(true),
-      catchError(error => {
-        this.handleError(error);
-        return of(false);
-      })
+      mapTo(true)
     );
   }
 
   public setTarget(targetRequestBody: { killerId: number; targetId: number }): Observable<boolean> {
     return this.http.post<string>(`${this.KILLERS_URL}/set-target`, targetRequestBody).pipe(
-      mapTo(true),
-      catchError(error => {
-        this.handleError(error);
-        return of(false);
-      }
-      )
+      mapTo(true)
     );
   }
 
   public cancelTarget(targetId: number): Observable<boolean> {
     return this.http.delete<string>(`${this.KILLERS_URL}/cancel-target/${targetId} `).pipe(
-      mapTo(true),
-      catchError(error => {
-        this.handleError(error);
-        return of(false);
-      })
+      mapTo(true)
     );
   }
-
-  private handleError(error: any) {
-    if (error instanceof HttpErrorResponse) {
-      alert(`${error.message}`);
-    } else {
-      alert(error); // TODO
-    }
-  }
-
 }

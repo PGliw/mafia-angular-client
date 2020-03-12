@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, mapTo, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 export interface LoginResponse {
   id: number;
@@ -21,10 +22,9 @@ export class AuthService {
   private readonly USER_SESSION = 'USER_SESSION';
   private readonly LOGIN = 'LOGIN';
   private readonly ID = 'ID';
-  private readonly API_URL = 'http://localhost:8443/api';
+  private readonly API_URL = environment.baseUrl;
   private readonly NAME = 'FIRST_NAME';
   private readonly LAST_NAME = 'LAST_NAME';
-  private loggedUser: string;
 
   constructor(private http: HttpClient) { }
 
@@ -56,6 +56,10 @@ export class AuthService {
         }
         )
       );
+  }
+
+  invalidateSession() {
+    this.removeLoginResponse();
   }
 
   get userName() {
