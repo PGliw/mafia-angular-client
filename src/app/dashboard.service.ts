@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { mapTo, switchMap, catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 export interface Widget {
   position: {
@@ -23,36 +24,19 @@ interface DashboardResponse {
 })
 export class DashboardService {
 
-  private readonly DASHBOARD_URL = 'http://localhost:8443/api/dashboard';
+  private readonly DASHBOARD_URL = `${environment.baseUrl}/dashboard`;
 
   constructor(private http: HttpClient) { }
 
   public getWidgets(userId: number): Observable<Widget[]> {
     return this.http.get<DashboardResponse>(`${this.DASHBOARD_URL}/get/${userId}`).pipe(
-      map(value => JSON.parse(value.widgets)),
-      catchError(error => {
-        this.handleError(error);
-        return of([]);
-      })
+      map(value => JSON.parse(value.widgets))
     );
   }
 
   public saveWidgets(userId: number, widgets: Widget[]): Observable<boolean> {
     return this.http.post<string>(`${this.DASHBOARD_URL}/add`, { userId, widgets: JSON.stringify(widgets) }).pipe(
-      mapTo(true),
-      catchError(error => {
-        this.handleError(error);
-        return of(false);
-      })
+      mapTo(true)
     );
-  }
-
-
-  private handleError(error: any) {
-    if (error instanceof HttpErrorResponse) {
-      alert(`${error.message}`);
-    } else {
-      alert(error); // TODO
-    }
   }
 }

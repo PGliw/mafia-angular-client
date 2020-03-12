@@ -19,7 +19,8 @@ export class TokenInterceptorService implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(error => {
-        if (error.status in [401, 403]) {
+        if (error.status === 401 || error.status === 403) {
+          this.authService.invalidateSession();
           this.router.navigate(['login']);
         }
         return throwError(error);

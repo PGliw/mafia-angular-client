@@ -48,7 +48,7 @@ export class MapComponent implements OnInit, OnChanges {
         })
       ],
       view: new View({
-        center: fromLonLat([17.038538, 51.107883]),
+        center: fromLonLat([17.038538, 51.107883]), // Wrocław
         zoom: 5
       })
     });

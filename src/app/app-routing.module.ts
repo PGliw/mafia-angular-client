@@ -9,7 +9,7 @@ import { DashboardGuardService } from './dashboard-guard.service';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardService]},
-  { path: 'dashboard', component: DashboardComponent, canActivate: [DashboardGuardService]}
+  { path: 'dashboard', component: DashboardComponent, canActivate: [DashboardGuardService], canLoad: [DashboardGuardService]}
 ];
 
 @NgModule({
