@@ -24,6 +24,7 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() title: string;
   @Input() debtors: Debtor[];
   @Input() killers: Killer[];
+  @Input() selectedPerson: Debtor | Killer;
 
   constructor() { }
 
@@ -36,6 +37,13 @@ export class MapComponent implements OnInit, OnChanges {
     if (this.map && this.debtors && this.killers) {
       this.addPoints();
       this.map.updateSize();
+    }
+    if (this.selectedPerson) {
+      const coords = this.getCoordinates(this.selectedPerson);
+      const marker = new Feature({
+        geometry: new Point(fromLonLat(coords))
+      });
+      this.map.getView().fit(marker.getGeometry(), this.map.getSize());
     }
   }
 

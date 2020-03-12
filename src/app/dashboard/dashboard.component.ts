@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   debtors: Debtor[];
   killers: Killer[];
   widgets: Widget[];
+  selected: Debtor | Killer;
   isEditing = false;
   widgetOptions: WidgetOption[] = [
     {
@@ -112,5 +113,10 @@ export class DashboardComponent implements OnInit {
 
   get killersItems() {
     if (this.killers) { return this.killers.map(killer => `${killer.pseudonym} - ${killer.salary}`); }
+  }
+
+  locationChanged(index: number) {
+    // alert(index);
+    this.selected = this.debtors[index];
   }
 }
