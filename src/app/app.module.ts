@@ -21,15 +21,23 @@ import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import { MapComponent } from './map/map.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
+import { KillerInfoDialogComponent } from './killer-info-dialog/killer-info-dialog.component';
+
 
 
 @NgModule({
+  entryComponents: [
+    KillerInfoDialogComponent
+  ],
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
     ListComponent,
-    MapComponent
+    MapComponent,
+    KillerInfoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +55,9 @@ import { MapComponent } from './map/map.component';
     MatCheckboxModule,
     MatCardModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

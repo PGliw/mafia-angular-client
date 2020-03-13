@@ -12,6 +12,7 @@ export class ListComponent implements OnInit {
   @Input() actionTile: string;
   @Input() actionIcon: string;
   @Output() itemSelected = new EventEmitter<number>();
+  @Output() addClicked = new EventEmitter();
 
   constructor() { }
 

@@ -5,6 +5,9 @@ import { DebtorsService, Debtor } from '../debtors.service';
 import { KillersService, Killer } from '../killers.service';
 import { Widget, DashboardService } from '../dashboard.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { KillerInfoDialogComponent } from '../killer-info-dialog/killer-info-dialog.component';
+
 
 interface WidgetOption {
   type: number;
@@ -56,6 +59,7 @@ export class DashboardComponent implements OnInit {
     private debtorService: DebtorsService,
     private killerService: KillersService,
     private dashboardService: DashboardService,
+    private dialog: MatDialog,
     private fb: FormBuilder
   ) {
   }
@@ -123,5 +127,13 @@ export class DashboardComponent implements OnInit {
       index,
       personType
     };
+  }
+
+  addPerson(personType: string) {
+    if (personType === 'Debtor') {
+      // TODO (not implemented)
+    } else if (personType === 'Killer' ) {
+      const dialogRef = this.dialog.open(KillerInfoDialogComponent, {width: '500px', height: 'auto'});
+    }
   }
 }
