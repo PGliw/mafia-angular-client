@@ -49,7 +49,6 @@ export class MapComponent implements OnInit, OnChanges {
       this.map.updateSize();
     }
     if (this.selectedPerson) {
-      console.log(this.selectedPerson);
       const index = this.selectedPerson.index;
       const personType = this.selectedPerson.personType;
       let marker;
@@ -59,8 +58,6 @@ export class MapComponent implements OnInit, OnChanges {
         marker = this.killersMarkers[index];
       }
       if (marker) {
-        // this.map.getView().fit(marker.getGeometry(), this.map.getSize());
-        // this.map.getView().centerOn(marker.getGeometry().getCoordinates(), this.map.getSize(), [570, 500]);
           this.map.getView().fit(marker.getGeometry(), {padding: [170, 50, 30, 150], maxZoom: 10});
       }
     }
