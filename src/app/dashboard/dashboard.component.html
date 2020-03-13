@@ -25,11 +25,11 @@
   <span *ngFor="let widget of widgets">
   <ngx-widget *ngIf="isWidgetVisible(widget)" [(position)]="widget.position" [movable]="isEditing" [resizable]="isEditing">
     <!-- TODO: make components for each widget (maybe one component for ) -->
-    <app-list *ngIf="widget.type == 0" [title]="widget.options.title" [items]="debtorsItems" actionTile="Wybacz" actionIcon = "favorite">
+    <app-list (itemSelected)="locationChanged($event, 'Debtor')" *ngIf="widget.type == 0" [title]="widget.options.title" [items]="debtorsItems" actionTile="Wybacz" actionIcon = "favorite">
     </app-list>
-    <app-list *ngIf="widget.type == 1" [title]="widget.options.title" [items]="killersItems" actionTile="Zleć" actionIcon="gps_fixed">
+    <app-list (itemSelected)="locationChanged($event, 'Killer')" *ngIf="widget.type == 1" [title]="widget.options.title" [items]="killersItems" actionTile="Zleć" actionIcon="gps_fixed">
     </app-list>
-    <app-map *ngIf="widget.type == 2" [title]="widget.options.title" [debtors]="debtors" [killers]="killers"></app-map>
+    <app-map *ngIf="widget.type == 2" [selectedPerson]="selectedOnMap" [title]="widget.options.title" [debtors]="debtors" [killers]="killers"></app-map>
   </ngx-widget>
     </span>
 </ngx-widget-grid>

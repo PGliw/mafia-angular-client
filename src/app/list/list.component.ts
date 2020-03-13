@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -11,10 +11,15 @@ export class ListComponent implements OnInit {
   @Input() items: string[];
   @Input() actionTile: string;
   @Input() actionIcon: string;
+  @Output() itemSelected = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  itemLocationClicked(index: number) {
+    this.itemSelected.emit(index);
   }
 
 }
