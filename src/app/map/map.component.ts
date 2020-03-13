@@ -24,7 +24,12 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() title: string;
   @Input() debtors: Debtor[];
   @Input() killers: Killer[];
-  @Input() selectedPerson: Debtor | Killer;
+  @Input() selectedPerson: {
+    index: number;
+    personType: string
+  };
+  private debtorsMarkers: Feature[];
+  private killersMarkers: Feature[];
 
   constructor() { }
 
@@ -35,15 +40,29 @@ export class MapComponent implements OnInit, OnChanges {
   // otherwise map is blank until resizing broswer window
   ngOnChanges() {
     if (this.map && this.debtors && this.killers) {
-      this.addPoints();
+      const debotorsLocations = this.debtors.map(debtor => this.getCoordinates(debtor));
+      const killersLocations = this.killers.map(killer => this.getCoordinates(killer));
+      this.debtorsMarkers = this.locationsToFeatures(debotorsLocations, 'assets/images/red_star_transparent_small.png');
+      this.killersMarkers = this.locationsToFeatures(killersLocations, 'assets/images/gun_small.png');
+      this.addMarkers(this.debtorsMarkers);
+      this.addMarkers(this.killersMarkers);
       this.map.updateSize();
     }
     if (this.selectedPerson) {
-      const coords = this.getCoordinates(this.selectedPerson);
-      const marker = new Feature({
-        geometry: new Point(fromLonLat(coords))
-      });
-      this.map.getView().fit(marker.getGeometry(), this.map.getSize());
+      console.log(this.selectedPerson);
+      const index = this.selectedPerson.index;
+      const personType = this.selectedPerson.personType;
+      let marker;
+      if (personType === 'Debtor') {
+        marker = this.debtorsMarkers[index];
+      } else if (personType === 'Killer') {
+        marker = this.killersMarkers[index];
+      }
+      if (marker) {
+        // this.map.getView().fit(marker.getGeometry(), this.map.getSize());
+        // this.map.getView().centerOn(marker.getGeometry().getCoordinates(), this.map.getSize(), [570, 500]);
+          this.map.getView().fit(marker.getGeometry(), {padding: [170, 50, 30, 150], maxZoom: 10});
+      }
     }
   }
 
@@ -62,22 +81,18 @@ export class MapComponent implements OnInit, OnChanges {
     });
   }
 
-  private addPoints() {
-    const debotorsLocations = this.debtors.map(debtor => this.getCoordinates(debtor));
-    const killerLocations = this.killers.map(killer => this.getCoordinates(killer));
-    const debtorsSourceVector = this.locationsToPointsSourceVector(debotorsLocations, 'assets/images/red_star_transparent_small.png');
-    const killersSourceVector = this.locationsToPointsSourceVector(killerLocations, 'assets/images/gun_small.png');
+  private addMarkers(markers: Feature[]) {
     const debtorsLayer = new layerVector({
-      source: debtorsSourceVector
-    });
-    const killersLayer = new layerVector({
-      source: killersSourceVector
+      source: new sourceVector(
+        {
+          features: markers
+        }
+      )
     });
     this.map.addLayer(debtorsLayer);
-    this.map.addLayer(killersLayer);
   }
 
-  private locationsToPointsSourceVector(locations: number[][], iconPath: string) {
+  private locationsToFeatures(locations: number[][], iconPath: string): Feature[] {
     const markers: Feature[] = locations.map(location => new Feature({
       geometry: new Point(fromLonLat(location))
     }));
@@ -89,11 +104,7 @@ export class MapComponent implements OnInit, OnChanges {
         }
       )
     })));
-    return new sourceVector(
-      {
-        features: markers
-      }
-    );
+    return markers;
   }
 
   private getCoordinates(person: Debtor | Killer): number[] {
