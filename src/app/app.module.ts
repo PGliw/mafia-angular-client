@@ -24,12 +24,13 @@ import { MapComponent } from './map/map.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import { KillerInfoDialogComponent } from './killer-info-dialog/killer-info-dialog.component';
-
+import { LocationChoiceDialogComponent } from './location-choice-dialog/location-choice-dialog.component';
 
 
 @NgModule({
   entryComponents: [
-    KillerInfoDialogComponent
+    KillerInfoDialogComponent,
+    LocationChoiceDialogComponent
   ],
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { KillerInfoDialogComponent } from './killer-info-dialog/killer-info-dial
     DashboardComponent,
     ListComponent,
     MapComponent,
-    KillerInfoDialogComponent
+    KillerInfoDialogComponent,
+    LocationChoiceDialogComponent
   ],
   imports: [
     BrowserModule,
