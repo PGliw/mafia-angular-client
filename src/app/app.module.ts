@@ -16,7 +16,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { NgxWidgetGridModule } from 'ngx-widget-grid';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {MatCheckboxModule} from '@angular/material';
-import { ListComponent } from './list/list.component';
+import { KillersListComponent } from './killers-list/killers-list.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
@@ -36,7 +36,7 @@ import { MatTableModule } from '@angular/material';
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    ListComponent,
+    KillersListComponent,
     MapComponent,
     KillerInfoDialogComponent,
     LocationChoiceDialogComponent
