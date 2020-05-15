@@ -31,3 +31,7 @@ mat-list-item {
 .scrollable-list {
   overflow: scroll;
 }
+
+table {
+  width: 100%;
+}

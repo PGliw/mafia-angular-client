@@ -13,6 +13,7 @@ export class ListComponent implements OnInit {
   @Input() actionIcon: string;
   @Output() itemSelected = new EventEmitter<number>();
   @Output() addClicked = new EventEmitter();
+  displayedColumns = ['personalData', 'actions'];
 
   constructor() { }
 
