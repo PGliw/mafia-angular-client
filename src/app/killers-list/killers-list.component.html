@@ -4,30 +4,30 @@
     <button (click)="addClicked.emit()" mat-flat-button color="primary">Nowy</button>
   </mat-card-header>
 
-  <table mat-table [dataSource]="items" class="mat-elevation-z8">
+  <table mat-table [dataSource]="killersTable" class="mat-elevation-z8" matSort>
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
     <!-- Position Column -->
     <ng-container matColumnDef="pseudonym">
-      <th mat-header-cell *matHeaderCellDef>Pseudonim</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Pseudonim</th>
       <td mat-cell *matCellDef="let element"> {{element.pseudonym}} </td>
     </ng-container>
 
     <ng-container matColumnDef="salary">
-      <th mat-header-cell *matHeaderCellDef>Stawka</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Stawka</th>
       <td mat-cell *matCellDef="let element"> {{element.salary}} </td>
     </ng-container>
 
     <ng-container matColumnDef="actions" style="width: fit-content;">
-      <th mat-header-cell *matHeaderCellDef> Akcsje </th>
+      <th mat-header-cell *matHeaderCellDef> Akcje </th>
       <td mat-cell *matCellDef="let element">
         <span class="row-buttons">
-          <button mat-storked-button [title]="actionTile">
-            <mat-icon>{{actionIcon}}</mat-icon>
+          <button mat-storked-button title="Zleć">
+            <mat-icon>gps_fixed</mat-icon>
           </button>
-          <button  mat-storked-button title="Pokaż na mapie">
+          <button  mat-storked-button title="Pokaż na mapie" (click)="itemLocationClicked(element)">
             <mat-icon>place</mat-icon>
           </button>
           <button mat-storked-button title="Edytuj">

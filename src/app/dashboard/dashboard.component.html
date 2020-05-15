@@ -27,7 +27,7 @@
     <!-- TODO: make components for each widget (maybe one component for ) -->
     <!-- <app-killers-list (itemSelected)="locationChanged($event, 'Debtor')" (addClicked) = "addPerson('Debtor')" *ngIf="widget.type == 0" [title]="widget.options.title" [items]="debtorsItems" actionTile="Wybacz" actionIcon = "favorite">
     </app-killers-list> -->
-    <app-killers-list (itemSelected)="locationChanged($event, 'Killer')" (addClicked) = "addPerson('Killer')" *ngIf="widget.type == 1" [title]="widget.options.title" [items]="killers" actionTile="Zleć" actionIcon="gps_fixed">
+    <app-killers-list (itemSelected)="locationChanged($event, 'Killer')" (addClicked) = "addPerson('Killer')" *ngIf="widget.type == 1" [title]="widget.options.title" [items]="killers">
     </app-killers-list>
     <app-map *ngIf="widget.type == 2" [selectedPerson]="selectedOnMap" [title]="widget.options.title" [debtors]="debtors" [killers]="killers"></app-map>
   </ngx-widget>

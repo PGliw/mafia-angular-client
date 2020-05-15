@@ -26,6 +26,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { KillerInfoDialogComponent } from './killer-info-dialog/killer-info-dialog.component';
 import { LocationChoiceDialogComponent } from './location-choice-dialog/location-choice-dialog.component';
 import { MatTableModule } from '@angular/material';
+import {MatSortModule} from '@angular/material/sort';
+
 
 @NgModule({
   entryComponents: [
@@ -60,7 +62,8 @@ import { MatTableModule } from '@angular/material';
     MatIconModule,
     MatSelectModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatSortModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
